@@ -31,6 +31,11 @@ def parse_command_line():
         dest='pa', type=float, default = 0)
 
     parser.add_argument(
+        "--nsites",
+        help="Number of sites (rows) to simulate for the site by species matrix",
+        dest='nsites', type=int, default = 10)
+
+    parser.add_argument(
         "--df",
         help="Community simulation output is a pandas dataframe. Default True. Else, output is a numpy array.", 
         dest='df', type=bool, default=True)
@@ -46,4 +51,4 @@ def parse_command_line():
 if __name__ == "__main__":
     args = parse_command_line()
     print(Simpd(ntips = args.ntips))
-    print(Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, df = args.df))
+    print(Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, df = args.df))
