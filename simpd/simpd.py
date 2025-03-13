@@ -138,7 +138,7 @@ class Simpd:
         return comm_pa
     
     
-    def simmat(self, sr, pa = 0, nsites = 10, df = True):
+    def simmat(self, sr, pa = 0, nsites = 10, df = False, csv = None):
         """
         Simulate a site by species matrix under a specified phylogenetic assumption
         
@@ -151,20 +151,26 @@ class Simpd:
             - -1 = related species are least likely to co-occur
             - 0 = no phylogenetic structure
             - 1 = related species are most likely to co-occur
+        df: bool; toggle if result is pandas data frame. Default False
+        csv: str; If given, resulting matrix is a csv with the given file name (do not use .csv extension)
         
         Return:
         ---
-        matrix of species presence/absence; rows = sites, columns = species (pandas df default)
+        matrix of species presence/absence; rows = sites, columns = species (numpy array)
         """
         ssm = pd.DataFrame([], columns = self.species) #make an empty dataframe with species as columns
         for s in range(nsites):
             site = self.simcom(sr, pa)
             ssm = pd.concat([ssm, site], ignore_index = True) #add new community row to dataframe
         
+        if type(csv) is str:
+            ssm.to_csv(f"{csv}.csv", index = False) #write the csv if specified
+
         if not df:
             ssm = ssm.to_numpy() #changes pandas data frame output to numpy array
         
-        return ssm
+        if not csv:
+            return ssm #stdout if csv not specified
     
 
 
