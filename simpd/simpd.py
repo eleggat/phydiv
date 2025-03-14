@@ -56,6 +56,8 @@ class Simpd:
         unused.remove(start)
         
         #Creating probability weights (min and max are 0.5 for pa = 0)
+        if pa < -1 or pa > 1:
+            raise Exception("Phylogenetic assumption (pa) must be within [-1:1].")
         max_p = abs(pa)/2 + 0.5
         min_p = 1 - max_p
         if verbose:
