@@ -57,4 +57,8 @@ def parse_command_line():
 if __name__ == "__main__":
     args = parse_command_line()
     print(Simpd(ntips = args.ntips))
-    print(Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, df = args.df, csv = args.csv))
+    if args.csv:
+        Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, df = args.df, csv = args.csv)
+        print(f"The csv has been written to {args.csv}.csv in the current directory.")
+    else:
+        print(Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, df = args.df, csv = args.csv))
