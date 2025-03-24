@@ -1,6 +1,6 @@
 # phydiv
 ## Pylogenetic diversity metrics from community sequence data
-This package takes community sequence data to calculate metrics of phylogenetic diversity. The communities sequences may be input by the user as a `.fasta` file, or may be given as a `.csv` file containing GenBank accession numbers. Species may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different species lists. Available metrics to calculate include Fisher's index (FI), mean phylogenetic distance (MPD), and abundance-weighted mean phylogenetic distance (MPDaw).
+This package takes community sequence data to calculate metrics of phylogenetic diversity. The communities sequences may be input by the user as a `.fasta` file, or may be given as a `.csv` file containing GenBank accession numbers. Species may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different species lists. Available metrics to calculate include Faith's phylogenetic diversity (FPD), mean phylogenetic distance (MPD), and abundance-weighted mean phylogenetic distance (MPDaw).
 
 **Input:**
 1. A `.fasta` file containing community sequences, or a `.csv` file containing GenBank accession numbers, and
@@ -26,13 +26,13 @@ If using accession numbers, the `.csv` should be two columns, with species name 
 
 
 **Output:** 
-1. A `.csv` file containing specified community phylogentic diversity metrics (*Default: only FI*).
+1. A `.csv` file containing specified community phylogentic diversity metrics (*Default: only FPD*).
 2. Optional: a metacommunity phylogenetic tree.
 3. Optional: phylogenetic trees with highlighted tips for each community.
 
 
 *Example `.csv`:*
-|Site|FI|
+|Site|FPD|
 |----|--|
 |site1|TBD|
 |site2|TBD|
@@ -43,12 +43,15 @@ If using accession numbers, the `.csv` should be two columns, with species name 
 
 #### Installation
 ```
-conda install toytree phydiv -c conda-forge
+conda install toytree Bio.Align.Applications.MuscleCommandline phydiv -c conda-forge
 git clone https://github.com/eleggat/phydiv.git
 cd ./phydiv
 pip install -e .
 ```
 
+### Resources
+- [`picante`](https://github.com/skembel/picante): A phylogenetic diversity package for R
+- Vellend, M., Cornwell, W. K., Magnuson-Ford, K. & Mooers, A. Ø. Measuring phylogenetic biodiversity. in Biological Diversity: Frontiers in Measurement and Assessment (eds. Magurran, A. E. & McGill, B. J.) (Oxford University Press, 2011).
 
 
 
