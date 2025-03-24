@@ -51,7 +51,7 @@ pip install -e .
 
 ### Resources
 - [`picante`](https://github.com/skembel/picante): A phylogenetic diversity package for R
-- Vellend, M., Cornwell, W. K., Magnuson-Ford, K. & Mooers, A. Ø. Measuring phylogenetic biodiversity. in Biological Diversity: Frontiers in Measurement and Assessment (eds. Magurran, A. E. & McGill, B. J.) (Oxford University Press, 2011).
+- Vellend, M., Cornwell, W. K., Magnuson-Ford, K. & Mooers, A. Ø. [Measuring phylogenetic biodiversity.](http://balsas-nahuatl.org/barcoding-electronic-docs/Vellend-et-al_Measuring-phylogenetic-diversity_2011_bookchap%5B1%5D.pdf) in Biological Diversity: Frontiers in Measurement and Assessment (eds. Magurran, A. E. & McGill, B. J.) (Oxford University Press, 2011).
 
 
 
