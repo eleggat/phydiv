@@ -5,8 +5,10 @@ This package takes community sequence data to calculate metrics of phylogenetic 
 **Input:**
 1. A .fasta file containing community sequences, or a .csv file containing GenBank accession numbers, and
 2. a site by species matrix for the communities of interest.
+3. Optional: Species may be removed from the communities prior to metric calculation with a user specification
 
 If using accession numbers, the .csv should be two columns, with species name or ID in the first and accession number in the second. The format of the species names/IDs does not matter, but should be consistent.
+/n
 *Example .csv:*
 |Species id|Accession number|
 |----------|----------------|
@@ -21,13 +23,12 @@ If using accession numbers, the .csv should be two columns, with species name or
 |site2|6|0|0|
 |site3|2|8|2|
 
-*Additional specifications:*
-- Species may be removed from the communities prior to metric calculation using an optional specification by the user.
 
 **Output:** 
 1. A .csv file containing specified community phylogentic diversity metrics (*Default: only FI*).
 2. Optional: a metacommunity phylogenetic tree.
 3. Optional: phylogenetic trees with highlighted tips for each community.
+/n
 *Example .csv:*
 |Site|FI|
 |----|--|
