@@ -39,3 +39,7 @@ import simpd
 simulation = Simpd()
 simulation.simmat(sr = 25, pa = 0.7, nsites = 30, df = True)
 ```
+
+#### Updates since presentation
+- Added option to write output to .csv
+- Added exception if `pa` is outside of -1 to 1 range
