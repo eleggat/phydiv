@@ -1,15 +1,16 @@
 # phydiv
 ## Pylogenetic diversity metrics from community sequence data
-This package takes community sequence data to calculate metrics of phylogenetic diversity. The communities sequences may be input by the user as a .fasta file, or may be given as a .csv file containing GenBank accession numbers. Species may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different species lists. Available metrics to calculate include Fisher's index (FI), mean phylogenetic distance (MPD), and abundance-weighted mean phylogenetic distance (MPDaw).
+This package takes community sequence data to calculate metrics of phylogenetic diversity. The communities sequences may be input by the user as a `.fasta` file, or may be given as a `.csv` file containing GenBank accession numbers. Species may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different species lists. Available metrics to calculate include Fisher's index (FI), mean phylogenetic distance (MPD), and abundance-weighted mean phylogenetic distance (MPDaw).
 
 **Input:**
-1. A .fasta file containing community sequences, or a .csv file containing GenBank accession numbers, and
+1. A `.fasta` file containing community sequences, or a `.csv` file containing GenBank accession numbers, and
 2. a site by species matrix for the communities of interest.
 3. Optional: Species may be removed from the communities prior to metric calculation with a user specification
 
-If using accession numbers, the .csv should be two columns, with species name or ID in the first and accession number in the second. The format of the species names/IDs does not matter, but should be consistent.
-/
-*Example .csv:*
+If using accession numbers, the `.csv` should be two columns, with species name or ID in the first and accession number in the second. The format of the species names/IDs does not matter, but should be consistent.
+
+
+*Example `.csv`:*
 |Species id|Accession number|
 |----------|----------------|
 |c.glandium|KC784066.1|
@@ -25,12 +26,12 @@ If using accession numbers, the .csv should be two columns, with species name or
 
 
 **Output:** 
-1. A .csv file containing specified community phylogentic diversity metrics (*Default: only FI*).
+1. A `.csv` file containing specified community phylogentic diversity metrics (*Default: only FI*).
 2. Optional: a metacommunity phylogenetic tree.
 3. Optional: phylogenetic trees with highlighted tips for each community.
 
 
-*Example .csv:*
+*Example `.csv`:*
 |Site|FI|
 |----|--|
 |site1|TBD|
