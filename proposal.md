@@ -4,7 +4,7 @@ This package takes community sequence data to calculate metrics of phylogenetic 
 
 **Input:**
 1. A `.fasta` file containing sequences for each OTU, or a `.csv` file containing GenBank accession numbers, **and**
-2. a site by OTU matrix for the communities of interest.
+2. a site by OTU matrix (as a `.csv`) for the communities of interest.
 3. Optional: OTUs may be removed from the communities prior to metric calculation with a user specification
 
 If using accession numbers, the `.csv` should be two columns, with OTU name or ID in the first and accession number in the second. The format of the OTU names/IDs does not matter, but should be consistent.
@@ -40,6 +40,9 @@ If using accession numbers, the `.csv` should be two columns, with OTU name or I
 
 
 The above mock community data is built into the package, and the output can be replicated by leaving both the OTU file and community matrix fields blank.
+
+
+Pseudocode can be found in `phydiv/phydiv.py`.
 
 
 ### In development
