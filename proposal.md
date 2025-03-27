@@ -27,7 +27,7 @@ If using accession numbers, the `.csv` should be two columns, with OTU name or I
 
 **Output:** 
 1. A `.csv` file containing specified community phylogentic diversity metrics (*Default: only MPD*).
-2. Optional: a visualiized metacommunity phylogenetic tree.
+2. Optional: a visualized metacommunity phylogenetic tree.
 3. Optional: visualized phylogenetic trees with highlighted tips for each community.
 
 
