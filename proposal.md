@@ -1,5 +1,5 @@
 # phydiv
-## Pylogenetic diversity metrics from community sequence data
+## Phylogenetic diversity metrics from community sequence data
 This package takes community sequence data to calculate metrics of phylogenetic diversity. The community sequences may be input by the user as a `.fasta` file, or may be given as a `.csv` file containing GenBank accession numbers. OTUs may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different OTU/species lists. Available metrics to calculate include mean phylogenetic distance (MPD), abundance-weighted mean phylogenetic distance (MPDaw), and Faith's phylogenetic diversity (FPD).
 
 **Input:**
