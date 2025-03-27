@@ -83,7 +83,15 @@ class Phydiv:
 		A function to calculate Faith's PD for each community and return a matrix of community and values.
 		"""
 
+def main():
+    """
+    Main function to process arguments and call the appropriate function.
+    """
+    
+if __name__ == "__main__":
+    main()
 
+  # will be needed to run from command line
 
 
 
