@@ -49,7 +49,7 @@ Pseudocode can be found in `phydiv/phydiv.py`.
 
 #### Installation
 ```
-conda install toytree Bio.Align.Applications.MuscleCommandline phydiv -c conda-forge
+conda install biopython toytree phydiv -c conda-forge
 git clone https://github.com/eleggat/phydiv.git
 cd ./phydiv
 pip install -e .

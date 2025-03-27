@@ -20,13 +20,8 @@ class Phydiv:
 	produce measures of phylogenetic diversity and tree visualizations.
 	"""
 
-	default_seq = pd.DataFrame(data={'OTU id': ['c.glandium', 'd.plexippus', 't.sinensis'],
-		'Accession number': ['KC784066.1', 'GU672935.1', 'MZ099432.1']}) #will need to make this a .csv
-
-	default_mat = pd.DataFrame(data={'Community': ['site1', 'site2', 'site3'],
-		'c.glandium': [10, 6, 2],
-		'd.plexippus': [5, 0, 8],
-		't.sinensis': [1, 0, 2]}) #will need to make this a .csv
+	default_seq = pd.read_csv('default_seq.csv')
+	default_mat = pd.read_csv('default_mat.csv')
 
 
 	def __init__(self, seq = default_seq, mat = default_mat):
