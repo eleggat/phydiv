@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 
 from Bio.Align.Applications import MuscleCommandline
+from Bio.GenBank import Record
 import toytree
 
 
@@ -20,9 +21,8 @@ class Phydiv:
 	produce measures of phylogenetic diversity and tree visualizations.
 	"""
 
-	default_seq = pd.read_csv('default_seq.csv')
-	default_mat = pd.read_csv('default_mat.csv')
-
+	default_seq = 'default_seq.csv'
+	default_mat = 'default_mat.csv'
 
 	def __init__(self, seq = default_seq, mat = default_mat):
 		self.seq = seq #this can be .fasta or .csv
@@ -36,11 +36,20 @@ class Phydiv:
 		"""
 		A function to pull GenBank sequences from accession numbers if self.seq is a .csv
 		"""
+		if self.seq[-4:] == ".csv":
+            #Code to pull GenBank sequences from accession numbers and write a .fasta
+            csv = pd.read_csv(self.seq)
+        
+        elif self.seq[-6:] == ".fasta":
+            pass
+
+        else: raise Exception("Sequence file must be .csv or .fasta")
+
 
 	def align(self):
 		"""
 		A function to produce a file of aligned sequences from MUSCLE.
-		Takes a .fasta file (either given, or created in the previous function).
+		Takes a .fasta file (pass in from previous function).
 		"""
 
 	def metacomm(self):
