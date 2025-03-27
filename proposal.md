@@ -1,10 +1,10 @@
 # phydiv
 ## Phylogenetic diversity metrics from community sequence data
-This package takes community sequence data to calculate metrics of phylogenetic diversity. The community sequences may be input by the user as a `.fasta` file, or may be given as a `.csv` file containing GenBank accession numbers. OTUs may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different OTU/species lists. Available metrics to calculate include mean phylogenetic distance (MPD), abundance-weighted mean phylogenetic distance (MPDaw), and Faith's phylogenetic diversity (FPD).
+This CLI tool takes community sequence data to calculate metrics of phylogenetic diversity. The community sequences may be input by the user as a `.fasta` file, or may be given as a `.csv` file containing GenBank accession numbers. OTUs may also by removed prior to calculation if specified by the user. This may be useful for comparing results to other diversity metrics that use different OTU/species lists. Available metrics to calculate include mean phylogenetic distance (MPD), abundance-weighted mean phylogenetic distance (MPDaw), and Faith's phylogenetic diversity (FPD).
 
 **Input:**
 1. A `.fasta` file containing sequences for each OTU, or a `.csv` file containing GenBank accession numbers, **and**
-2. a site by OTU matrix (as a `.csv`) for the communities of interest.
+2. a site-by-OTU matrix (as a `.csv`) for the communities of interest.
 3. Optional: OTUs may be removed from the communities prior to metric calculation with a user specification
 
 If using accession numbers, the `.csv` should be two columns, with OTU name or ID in the first and accession number in the second. The format of the OTU names/IDs does not matter, but should be consistent.
@@ -48,7 +48,7 @@ Pseudocode can be found in `phydiv/phydiv.py`.
 ### In development
 
 #### Installation
-```
+```bash
 conda install biopython toytree phydiv -c conda-forge
 git clone https://github.com/eleggat/phydiv.git
 cd ./phydiv
