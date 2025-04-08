@@ -4,11 +4,11 @@
 Call `pip install -e .` to install package locally for testing.
 """
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # build command
 setup(
-    name="simpd",
+    name="phydiv",
     version="0.0.1",
     author="Emily Leggat",
     author_email="el3258@columbia.edu",
@@ -16,6 +16,7 @@ setup(
     description="A package to simulate site by species matrices under different pylogenetic diversity assumptions",
     classifiers=["Programming Language :: Python :: 3"],
     entry_points={
-        "console_scripts": ["simpd = simpd.__main__:main"]
+        "console_scripts": ["simpd = phydiv.src.simpd.__main__:main"]
     },
+    packages = find_packages()
 )
