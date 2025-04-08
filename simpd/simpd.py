@@ -7,8 +7,6 @@ A class that allows users to make site by species matrices from a random metacom
 # Imports
 import numpy as np
 import pandas as pd
-
-from Bio.Align.Applications import MuscleCommandline
 import toytree
 
 # Establishing the class
