@@ -4,4 +4,4 @@
 phydiv program for phylogenetic diversity calculation
 """
 
-__version__ = "0.0.1"
+from .phydiv import Phydiv
