@@ -32,18 +32,18 @@ class Phydiv:
 	def __repr__(self):
 		return f"Phylogenetic diversity will be calculated using sequences in {self.seq} and communities in {self.mat}."
 
-	def csv_to_fasta(self):
+#	def csv_to_fasta(self):
 		"""
 		A function to pull GenBank sequences from accession numbers if self.seq is a .csv
 		"""
-		if self.seq[-4:] == ".csv":
+#		if self.seq[-4:] == ".csv":
             #Code to pull GenBank sequences from accession numbers and write a .fasta
-            csv = pd.read_csv(self.seq)
+#            csv = pd.read_csv(self.seq)
         
-        elif self.seq[-6:] == ".fasta":
-            pass
+#        elif self.seq[-6:] == ".fasta":
+#            pass
 
-        else: raise Exception("Sequence file must be .csv or .fasta")
+#        else: raise Exception("Sequence file must be .csv or .fasta")
 
 
 	def align(self):
