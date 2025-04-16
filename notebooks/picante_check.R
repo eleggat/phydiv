@@ -25,8 +25,9 @@ pd <- pd(comm_data, tree_data, include.root = TRUE)
 #mpd
 mpd <- mpd(comm_data, dm_alt)
 
-#mnnd
+#mntd
+mntd <- mntd(comm_data, dm_alt)
 
 
 # All of the metrics
-mock_metrics <- cbind(pd, mpd)
+mock_metrics <- cbind(pd, mpd, mntd)
