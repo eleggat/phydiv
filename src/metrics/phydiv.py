@@ -9,8 +9,7 @@ community trees
 import numpy as np
 import pandas as pd
 
-from Bio.Align.Applications import MuscleCommandline
-from Bio.GenBank import Record
+
 import toytree
 
 
