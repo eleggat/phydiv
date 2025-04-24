@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 """
-A program that takes community sequence data to calculate phylogenetic diversity and visualize
-community trees
+A program that takes a metacommunity phylogeny and site by species matrices to 
+visualize community phylogenetic assembly and calculate phylogenetic diversity
 """
 
 # Imports
@@ -31,14 +31,15 @@ class Phydiv:
         
         if (tree is None) != (matrix is None):
             raise ValueError("You must provide both 'tree' and 'matrix', or neither.")
-        elif tree is not None and matrix is not None:
-            self.tree = tree
-            self.matrix = matrix
-        else:
+        elif tree is not None and matrix is not None: #user input
+            self.tree = toytree.tree(tree)
+            self.matrix = pd.read_csv(matrix)
+        else: #default data
             self.tree = default_tree
             self.matrix = default_matrix
-    
-        self.spp = self.matrix.apply(lambda row: row.index[row == 1].tolist(), axis=1) #list of species in each community
+
+    	#list of species in each community
+        self.spp = self.matrix.apply(lambda row: row.index[row == 1].tolist(), axis=1)
     
     
     def __repr__(self):
@@ -47,7 +48,7 @@ class Phydiv:
     
     # Plotting functions
     
-    def plot_prune(self, community = None):
+    def plot_prune(self, community = None, save = None):
         """
         Plot pruned trees for sample communities
         
@@ -83,9 +84,12 @@ class Phydiv:
             # add a label to each subplot
             #for adx, ax in enumerate(axes):
             #    ax.label.text = f"community {comm_trees[c]}"
+
+        if type(save) is str:
+        	toytree.save(canvas, f"{save}")
     
     
-    def plot_highlight(self, community = None):
+    def plot_highlight(self, community = None, save = None):
         """
         Plot metacommunity phylogeny with tips highlighted for species in specified communities
         
@@ -115,9 +119,12 @@ class Phydiv:
     
         # plotting community
         self.tree.draw(node_mask=mask[community], node_sizes=12);
+
+        if type(save) is str:
+        	toytree.save(canvas, f"{save}")
     
         
-    def plot_all(self):
+    def plot_all(self, save = None):
         """
         Plot metacommunity phylogeny with heatmap for species presence across all communities
         
@@ -168,6 +175,9 @@ class Phydiv:
         
         # hide axes coordinates
         axes.show = False
+
+        if type(save) is str:
+        	toytree.save(canvas, f"{save}")
 
 
     # Metric functions
