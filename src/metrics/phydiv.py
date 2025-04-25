@@ -283,3 +283,40 @@ class Phydiv:
             pd.Dataframe(tree_mntd).to_csv(f"{csv}.csv", index = False) #write the csv if specified
         else:
             return tree_mntd
+
+
+    def metric_all(self, csv = None):
+        """
+        Calculate all phylogenetic diversity metrics for each community (Faith's PD, MPD, and MNTD)
+        
+        Parameters:
+        ---
+        tree: toytree tree
+        matrix: site by species matrix in pandas format
+        
+        Return:
+        ---
+        Pandas dataframe of diversity metric values for each community. Option for writing to csv.
+        """
+        
+        # calculate all metrics
+        fpd = self.metric_fpd()
+        mpd = self.metric_mpd()
+        mntd = self.metric_mntd()
+    
+        #combine all metrics into pandas dataframe
+        metrics = pd.DataFrame({"Faith's PD": fpd,
+                                "MPD": mpd,
+                                "MNTD": mntd})
+    
+        # Option to write csv or print to stdout
+        if type(csv) is str:
+            metrics.to_csv(f"{csv}.csv", index = False) #write the csv if specified
+        else:
+            return metrics
+
+
+
+
+
+
