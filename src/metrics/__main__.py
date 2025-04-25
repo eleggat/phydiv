@@ -47,6 +47,25 @@ def parse_command_line():
 
 if __name__ == "__main__":
     args = parse_command_line()
+    if not args.plot and not args.metric:
+        print(Phydiv(tree = args.tree, matrix = args.matrix))
+
+    #command line plotting arguments
+    if args.plot:
+        if args.plot == "prune": #option for specifying community?
+            Phydiv(tree = args.tree, matrix = args.matrix).plot_prune()
+        elif args.plot == "highlight": #option to specify community?
+            Phydiv(tree = args.tree, matrix = args.matrix).plot_highlight()
+        elif args.plot == "all":
+            Phydiv(tree = args.tree, matrix = args.matrix).plot_all()
+        else:
+            print("Specify plot type ('all', 'highlight', or 'prune')")
+
+    #command line metrics
+    if args.metric:
+        Phydiv(tree = args.tree, matrix = args.matrix).metric_all(csv = args.metric)
+        print(f"The metrics have been written to {args.metric}.csv in the current directory.")
+
     
 
 
