@@ -42,7 +42,7 @@ def parse_command_line():
 
     parser.add_argument(
         "--csv",
-        help="When given, output is written to a csv file with specified str name. Do not include .csv extension in file name.", 
+        help="When given, output is written to a csv file with specified str name.", 
         dest='csv', type=str, default=None)
 
     parser.add_argument(
@@ -59,6 +59,6 @@ if __name__ == "__main__":
     print(Simpd(ntips = args.ntips))
     if args.csv:
         Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, df = args.df, csv = args.csv)
-        print(f"The csv has been written to {args.csv}.csv in the current directory.")
+        print(f"The csv has been written to {args.csv} in the current directory.")
     else:
         print(Simpd(ntips = args.ntips).simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, df = args.df, csv = args.csv))

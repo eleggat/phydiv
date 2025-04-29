@@ -41,7 +41,7 @@ def parse_command_line():
     parser.add_argument(
         "-d",
         "--diversity"
-        help="Write diversity metrics (Faith's PD, MPD, and MNTD) to given csv name. *Optional*",
+        help="Write diversity metrics (Faith's PD, MPD, and MNTD) to given CSV name. *Optional*",
         dest='metric', type=str)
 
 
@@ -64,8 +64,8 @@ if __name__ == "__main__":
     #command line metrics
     if args.metric:
         Phydiv(tree = args.tree, matrix = args.matrix).metric_all(csv = args.metric)
-        print(f"The metrics have been written to {args.metric}.csv in the current directory.")
-        
+        print(f"The metrics have been written to {args.metric} in the current directory.")
+
 
     
 

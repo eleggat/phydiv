@@ -154,7 +154,7 @@ class Simpd:
             - 0 = no phylogenetic structure
             - 1 = related species are most likely to co-occur
         df: bool; toggle if result is pandas data frame. Default False
-        csv: str; If given, resulting matrix is a csv with the given file name (do not use .csv extension)
+        csv: str; If given, resulting matrix is a csv with the given file name
         
         Return:
         ---
@@ -166,7 +166,7 @@ class Simpd:
             ssm = pd.concat([ssm, site], ignore_index = True) #add new community row to dataframe
         
         if type(csv) is str:
-            ssm.to_csv(f"{csv}.csv", index = False) #write the csv if specified
+            ssm.to_csv(f"{csv}", index = False) #write the csv if specified
 
         if not df:
             ssm = ssm.to_numpy() #changes pandas data frame output to numpy array

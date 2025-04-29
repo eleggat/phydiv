@@ -211,7 +211,7 @@ class Phydiv:
     
         # Option to write csv or print to stdout
         if type(csv) is str:
-            pd.Dataframe(tree_fpd).to_csv(f"{csv}.csv", index = False) #write the csv if specified
+            pd.Dataframe(tree_fpd).to_csv(f"{csv}", index = False) #write the csv if specified
         else:
             return tree_fpd
 
@@ -241,7 +241,7 @@ class Phydiv:
     
         # Option to write csv or print to stdout
         if type(csv) is str:
-            pd.Dataframe(tree_mpd).to_csv(f"{csv}.csv", index = False) #write the csv if specified
+            pd.Dataframe(tree_mpd).to_csv(f"{csv}", index = False) #write the csv if specified
         else:
             return tree_mpd
 
@@ -280,7 +280,7 @@ class Phydiv:
         
         # Option to write csv or print to stdout
         if type(csv) is str:
-            pd.Dataframe(tree_mntd).to_csv(f"{csv}.csv", index = False) #write the csv if specified
+            pd.Dataframe(tree_mntd).to_csv(f"{csv}", index = False) #write the csv if specified
         else:
             return tree_mntd
 
@@ -311,7 +311,7 @@ class Phydiv:
     
         # Option to write csv or print to stdout
         if type(csv) is str:
-            metrics.to_csv(f"{csv}.csv", index = False) #write the csv if specified
+            metrics.to_csv(f"{csv}", index = False) #write the csv if specified
         else:
             return metrics
 
