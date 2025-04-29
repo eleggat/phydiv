@@ -65,6 +65,7 @@ if __name__ == "__main__":
     if args.metric:
         Phydiv(tree = args.tree, matrix = args.matrix).metric_all(csv = args.metric)
         print(f"The metrics have been written to {args.metric}.csv in the current directory.")
+        
 
     
 
