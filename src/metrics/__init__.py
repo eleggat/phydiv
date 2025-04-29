@@ -4,4 +4,4 @@
 phydiv program for phylogenetic diversity calculation
 """
 
-from .phydiv import Phydiv
+from . import Phydiv
