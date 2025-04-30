@@ -1,7 +1,4 @@
 #!/usr/bin/env python
 
-"""
-phydiv program for phylogenetic diversity calculation
-"""
-
-from . import Phydiv
+# Import the main class
+from .phydiv import Phydiv

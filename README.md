@@ -16,7 +16,7 @@ Metrics of phylogenetic diversity (Faith's PD, MPD, and MNTD) for each community
 
 ```
 git clone https://github.com/eleggat/phydiv.git
-cd ./mini-project
+cd ./phydiv
 pip install -e .
 ```
 

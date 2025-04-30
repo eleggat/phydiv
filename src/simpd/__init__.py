@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-"""
-Simpd program for ...
-"""
-
-__version__ = "0.0.1"
-
+# Import the main class
 from .simpd import Simpd
 
