@@ -37,7 +37,7 @@ python phydiv --tree my_tree.nwk --matrix my_matrix.csv --plot all --diversity m
 ```
 import phydiv
 
-my_community = Phydiv(tree = my_tree.nwk, matrix = my_matrix.nwk)
+my_community = phydiv.Phydiv(tree = my_tree.nwk, matrix = my_matrix.nwk)
 my_community.plot_all()
 my_community.metric_all(csv = "my_metrics.csv")
 ```
@@ -71,7 +71,7 @@ python phydiv simpd --sr 25 --pa 0.7 --nsites 30 --csv site_sp_matrix.csv
 ```
 import phydiv
 
-simulation = Simpd().simmat(sr = 25, pa = 0.7, nsites = 30, df = True)
+simulation = phydiv.Simpd().simmat(sr = 25, pa = 0.7, nsites = 30, df = True)
 ```
 
 ### See also
