@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 
 import itertools
+import os
 import random
 import toytree
 import toyplot
@@ -26,8 +27,13 @@ class Phydiv:
     # Initial setup functions
     
     def __init__(self, tree = None, matrix = None):
-        default_tree = toytree.tree("mock_tree.nwk")
-        default_matrix = pd.read_csv("mock_matrix.csv")
+        # Default data
+        script_dir = os.path.dirname(__file__)
+        matrix_path = os.path.join(script_dir, 'data', 'mock_matrix.csv')
+        tree_path = os.path.join(script_dir, 'data', 'mock_tree.nwk')
+
+        default_tree = toytree.tree(tree_path)
+        default_matrix = pd.read_csv(matrix_path)
         
         if (tree is None) != (matrix is None):
             raise ValueError("You must provide both 'tree' and 'matrix', or neither.")
@@ -38,7 +44,7 @@ class Phydiv:
             self.tree = default_tree
             self.matrix = default_matrix
 
-    	#list of species in each community
+    	# List of species in each community
         self.spp = self.matrix.apply(lambda row: row.index[row == 1].tolist(), axis=1)
     
     
