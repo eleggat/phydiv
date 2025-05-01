@@ -1,2 +1,2 @@
 [console_scripts]
-simpd = phydiv.src.simpd.__main__:main
+phydiv = src.metrics.__main__:main

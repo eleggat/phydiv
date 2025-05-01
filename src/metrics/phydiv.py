@@ -38,13 +38,15 @@ class Phydiv:
             raise ValueError("You must provide both 'tree' and 'matrix', or neither.")
         elif tree is not None and matrix is not None: #user input
             self.tree = toytree.tree(tree)
-            self.matrix = pd.read_csv(matrix)
+            self.matrix = pd.read_csv(matrix, index_col = 0)
+            self.matrix.columns = self.matrix.columns.str.replace(' ','_') #get rid of spaces in spp names
+            self.matrix = self.matrix.dropna() #drop NaNs in matrix
         else: #default data
             self.tree = default_tree
             self.matrix = default_matrix
 
     	# List of species in each community
-        self.spp = self.matrix.apply(lambda row: row.index[row == 1].tolist(), axis=1)
+        self.spp = self.matrix.apply(lambda row: row.index[row > 0].tolist(), axis=1)
 
 
     def __repr__(self):
@@ -52,6 +54,16 @@ class Phydiv:
 
 
     # Plotting functions
+
+    def plot_tree(self):
+        """
+        Plot the whole metacommunity
+
+        Return:
+        ---
+        plot of the metacommunity phylogeny
+        """
+        self.tree.draw();
 
     def plot_prune(self, community = None, save = None):
         """
@@ -94,7 +106,7 @@ class Phydiv:
         	toytree.save(canvas, f"{save}")
 
 
-    def plot_highlight(self, community = None, save = None):
+    def plot_highlight(self, community = None, abundance = False, save = None):
         """
         Plot metacommunity phylogeny with tips highlighted for species in specified communities
 
@@ -106,6 +118,7 @@ class Phydiv:
         ---
         plot of metacommunity phylogeny with highlighted tips
         """
+
         if type(community) is int:
             pass
         #elif type(community) is not list:
@@ -115,6 +128,20 @@ class Phydiv:
         else:
             raise TypeError("Specify community by matrix row index")
 
+        # make species matrix a numpy array
+        matrix_np = self.matrix.to_numpy()
+
+        # convert all data to 1s and 0s if abundance is False
+        nrows = matrix_np.shape[0]
+        ncols = matrix_np.shape[1]
+        if not abundance:
+            for r in range(nrows):
+                for c in range(ncols):
+                    if matrix_np[r][c] > 0:
+                        matrix_np[r][c] = 1
+                    else:
+                        matrix_np[r][c] = 0
+
         #create a mask for species in the community only
         mask = []
         for i in range(len(self.spp)):
@@ -122,14 +149,20 @@ class Phydiv:
             comm_mask = self.tree.get_node_mask(*query_list)
             mask.append(comm_mask)
 
+        # set abundance data for nodes if abundance is True
+        #if abundance:
+        #    self.tree.set_node_data("abundance", matrix_np[community], inplace = True)
+
         # plotting community
+        #colormap = toyplot.color.brewer.map("RedPurple")
+
         self.tree.draw(node_mask=mask[community], node_sizes=12);
 
         if type(save) is str:
         	toytree.save(canvas, f"{save}")
 
 
-    def plot_all(self, save = None):
+    def plot_all(self, abundance = False, save = None):
         """
         Plot metacommunity phylogeny with heatmap for species presence across all communities
 
@@ -149,19 +182,38 @@ class Phydiv:
         trows = tmatrix.shape[0]
         tcolumns = tmatrix.shape[1]
 
-        # create a canvas
-        canvas = toyplot.Canvas(width=540, height=900);
+        # convert all data to 1s and 0s if abundance is False
+        if not abundance:
+            for r in range(trows):
+                for c in range(tcolumns):
+                    if tmatrix[r][c] > 0:
+                        tmatrix[r][c] = 1
+                    else:
+                        tmatrix[r][c] = 0
 
-        # add tree
-        axes = canvas.cartesian(bounds=(50, 150, 50, 850)) # xmin, xmax, ymin, ymax
+        # create a canvas
+        c_width = tcolumns*25 + 50 #total width
+        c_height = trows*15 + 50 #total height
+        canvas = toyplot.Canvas(width=c_width, height=c_height);
+
+        # add tree 
+        tree_xmin = 25
+        tree_xmax = 125
+        tree_ymin = 25
+        tree_ymax = c_height - 25
+        axes = canvas.cartesian(bounds=(tree_xmin, tree_xmax, tree_ymin, tree_ymax))
         self.tree.draw(axes=axes, tip_labels=True, tip_labels_align=True)
 
         # add matrix
+        tab_xmin = tree_xmax + 5
+        tab_xmax = c_width - 25
+        tab_ymin = tree_ymin
+        tab_ymax = tree_ymax
         table = canvas.table(
             rows= trows, #n species
             columns= tcolumns,  #n communities
             margin=1,
-            bounds=(160, 490, 50, 850),
+            bounds=(tab_xmin, tab_xmax, tab_ymin, tab_ymax),
         )
 
         colormap = toyplot.color.brewer.map("RedPurple") #need to reverse color!
@@ -205,13 +257,19 @@ class Phydiv:
         comm_trees = []
         for i in range(len(self.spp)):
             query_list = self.spp[i]
-            new_tree = toytree.mod.prune(self.tree, *query_list)
+            if len(query_list) == 0:
+                new_tree = None #no tree if no species
+            else:
+                new_tree = toytree.mod.prune(self.tree, *query_list)
             comm_trees.append(new_tree)
 
         # For the pruned trees, sum distances
         tree_fpd = []
         for ptree in comm_trees:
-            fpd = ptree.get_node_data("dist").sum()
+            if ptree == None:
+                fpd = None #no fpd if no species/tree
+            else:
+                fpd = ptree.get_node_data("dist").sum()
             tree_fpd.append(fpd)
 
         # Option to write csv or print to stdout
@@ -220,7 +278,7 @@ class Phydiv:
         else:
             return tree_fpd
 
-    def metric_mpd(self, csv = None):
+    def metric_mpd(self, abundance = False, csv = None):
         """
         Calculate mean phylogenetic distance (MPD) for each community
 
@@ -242,7 +300,10 @@ class Phydiv:
                 query_list = pairs[p]
                 dist = self.tree.distance.get_node_distance(*query_list)
                 pair_dists.append(dist)
-            tree_mpd.append(sum(pair_dists)/len(pair_dists))
+            if len(pair_dists) == 0:
+                tree_mpd.append(None) #append none if len = 0
+            else:
+                tree_mpd.append(sum(pair_dists)/len(pair_dists)) #append average to mpd list
 
         # Option to write csv or print to stdout
         if type(csv) is str:
@@ -250,7 +311,7 @@ class Phydiv:
         else:
             return tree_mpd
 
-    def metric_mntd(self, csv = None):
+    def metric_mntd(self, abundance = False, csv = None):
         """
         Calculate mean nearest taxon distance (MNTD) for each community
 
@@ -271,7 +332,6 @@ class Phydiv:
         for comm in self.spp:
             comm_dm = meta_dm.loc[comm, comm]
             comm_dists.append(comm_dm)
-        comm_dists[0]
 
         # calculate MNTD for each community
         tree_mntd = []
@@ -280,8 +340,14 @@ class Phydiv:
             for row in range(dm.shape[0]): #for each species (row)
                 sp_dist = list(dm.iloc[row]) #select species row
                 del sp_dist[row] #exclude same-species distance
-                nt.append(min(sp_dist)) #append minimum to nearest list
-            tree_mntd.append(sum(nt)/len(nt)) #append average to mntd list
+                if len(sp_dist) == 0:
+                    pass #do nothing if sp_dist is empty
+                else:
+                    nt.append(min(sp_dist)) #append minimum to nearest list
+            if len(nt) == 0:
+                tree_mntd.append(None) #append none if len = 0
+            else:
+                tree_mntd.append(sum(nt)/len(nt)) #append average to mntd list
 
         # Option to write csv or print to stdout
         if type(csv) is str:

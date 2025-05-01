@@ -13,10 +13,20 @@ setup(
     author="Emily Leggat",
     author_email="el3258@columbia.edu",
     license="GPLv3",
-    description="A package to simulate site by species matrices under different pylogenetic diversity assumptions",
+    description="A package to calculate phylogenetic diversity metrics from community data.",
     classifiers=["Programming Language :: Python :: 3"],
+    dependencies = [
+        "itertools",
+        "os",
+        "numpy",
+        "pandas",
+        "toytree",
+        "toyplot"],
     entry_points={
-        "console_scripts": ["simpd = phydiv.src.simpd.__main__:main"]
+        "console_scripts": [
+            "phydiv = src.metrics.__main__:main"
+            ]
+
     },
     packages = find_packages()
 )
