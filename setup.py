@@ -24,7 +24,7 @@ setup(
         "toyplot"],
     entry_points={
         "console_scripts": [
-            "phydiv = src.metrics.__main__:main"
+            "phydiv = src.__main__:main"
             ]
 
     },
