@@ -8,6 +8,7 @@ visualize community phylogenetic assembly and calculate phylogenetic diversity
 # Imports
 import itertools
 import os
+import warnings
 
 import numpy as np
 import pandas as pd
@@ -185,6 +186,10 @@ class Phydiv:
         trows = tmatrix.shape[0]
         tcolumns = tmatrix.shape[1]
 
+        # raise warning if too many columns
+        if tcolumns > 30:
+            warnings.warn(">30 communities. Consider grouping and plotting fewer at once.")
+
         # convert all data to 1s and 0s if abundance is False
         if not abundance:
             for r in range(trows):
@@ -237,7 +242,7 @@ class Phydiv:
         axes.show = False
 
         if type(save) is str:
-        	toytree.save(canvas, f"{save}")
+            toytree.save(canvas, f"{save}")
 
 
     # Metric functions
