@@ -6,6 +6,10 @@ Main argparse for command line
 
 # Imports
 import argparse
+
+from metrics import phydiv
+from simpd import simpd
+
 from metrics.phydiv import Phydiv
 from simpd.simpd import Simpd
 
@@ -30,13 +34,13 @@ def parse_command_line():
 		"-t",
 		"--tree",
 		help="Metacommunity tree. Should be Newick, NHX, or Nexus format. If given, --matrix must also be given.",
-		dest='tree', type=str, default='metrics/data/mock_tree.nwk')
+		dest='tree', type=str)
 
 	plot_parser.add_argument(
 		"-m",
 		"--matrix",
 		help="Site-by-OTU matrix of communities. Must be a CSV. If given, --tree must also be given.",
-		dest='matrix', type=str, default='metrics/data/mock_matrix.csv')
+		dest='matrix', type=str)
 
 	plot_parser.add_argument(
 		"-p",
@@ -68,13 +72,13 @@ def parse_command_line():
 		"-t",
 		"--tree",
 		help="Metacommunity tree. Should be Newick, NHX, or Nexus format. If given, --matrix must also be given.",
-		dest='tree', type=str, default='metrics/data/mock_tree.nwk')
+		dest='tree', type=str)
 
 	metric_parser.add_argument(
 		"-m",
 		"--matrix",
 		help="Site-by-OTU matrix of communities. Must be a CSV. If given, --tree must also be given.",
-		dest='matrix', type=str, default='metrics/data/mock_matrix.csv')
+		dest='matrix', type=str)
 
 	metric_parser.add_argument(
 		"-d",
@@ -152,43 +156,43 @@ if __name__ == "__main__":
 
 	# plotting arguments
 	if args.command == "plot":
-		data = Phydiv(tree = metric.tree, matrix = metric.matrix)
+		data = Phydiv(tree = args.tree, matrix = args.matrix)
 
-		if plot.plottype == 'all':
-			data.plot_all(save = plot.file)
-		elif plot.plottype == 'highlight':
-			data.plot_highlight(community = plot.community, save = plot.file)
-		elif plot.plottype == 'prune':
-			data.plot_prune(save = plot.file)
+		if args.plottype == 'all':
+			data.plot_all(save = args.file)
+		elif args.plottype == 'highlight':
+			data.plot_highlight(community = args.community, save = args.file)
+		elif args.plottype == 'prune':
+			data.plot_prune(save = args.file)
 
-		print(f"Plot(s) written to {plot.file}.")
+		print(f"Plot(s) written to {args.file}.")
 
 	# metric arguments
 	elif args.command == "metric":
-		data = Phydiv(tree = metric.tree, matrix = metric.matrix)
+		data = Phydiv(tree = args.tree, matrix = args.matrix)
 
-		if metric.diversity == 'fpd':
-			data.metric_fpd(csv = metric.file)
-		elif metric.diversity == 'mpd':
-			data.metric_mpd(csv = metric.file)
-		elif metric.diversity == 'mntd':
-			data.metric_mntd(csv = metric.file)
-		elif metric.diversity == 'all':
-			data.metric_all(csv = metric.file)
+		if args.diversity == 'fpd':
+			data.metric_fpd(csv = args.file)
+		elif args.diversity == 'mpd':
+			data.metric_mpd(csv = args.file)
+		elif args.diversity == 'mntd':
+			data.metric_mntd(csv = args.file)
+		elif args.diversity == 'all':
+			data.metric_all(csv = args.file)
 
-		print(f"Metrics written to {metric.file}.")
+		print(f"Metrics written to {args.file}.")
 
 	# simpd arguments
 	elif args.command == "simpd":
-		data = Simpd(ntips = simpd.ntips)
+		data = Simpd(ntips = args.ntips)
 
 		#write tree data
-		data.sp_tree.write(path = simpd.treefile)
+		data.sp_tree.write(path = args.treefile)
 
 		#write community matrix data
-		data.simmat(sr = simpd.sr, pa = simpd.pa, nsites = simpd.nsites, csv = simpd.communityfile)
+		data.simmat(sr = args.sr, pa = args.pa, nsites = args.nsites, csv = args.communityfile)
 
-		print(f"Simulated tree written to {simpd.treefile}. Simulated community written to {args.communityfile}.")
+		print(f"Simulated tree written to {args.treefile}. Simulated community written to {args.communityfile}.")
 
 
 
