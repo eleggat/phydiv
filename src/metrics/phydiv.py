@@ -55,7 +55,7 @@ class Phydiv:
 
     # Plotting functions
 
-    def plot_tree(self):
+    def plot_tree(self, save = None):
         """
         Plot the whole metacommunity
 
@@ -64,6 +64,9 @@ class Phydiv:
         plot of the metacommunity phylogeny
         """
         self.tree.draw();
+
+        if type(save) is str:
+            toytree.save(canvas, f"{save}")
 
     def plot_prune(self, community = None, save = None):
         """
