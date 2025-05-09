@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: phydiv
+Version: 0.0.1
+Summary: A package to calculate phylogenetic diversity metrics from community data.
+Author: Emily Leggat
+Author-email: el3258@columbia.edu
+License: GPLv3
+Classifier: Programming Language :: Python :: 3
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: license
+Dynamic: summary

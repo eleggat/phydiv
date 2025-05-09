@@ -1,0 +1,2 @@
+[console_scripts]
+phydiv = src.__main__:main

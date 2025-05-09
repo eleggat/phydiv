@@ -22,11 +22,13 @@ setup(
         "pandas",
         "toytree",
         "toyplot"],
+    package_dir={'': 'src'},
+    packages=find_packages(where='src'),
     entry_points={
         "console_scripts": [
             "phydiv = src.__main__:main"
             ]
 
-    },
-    packages = find_packages()
+    }
+    
 )
