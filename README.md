@@ -47,7 +47,7 @@ python phydiv simpd -h
 |`file`|**Required**. File name for saving plot. Should be HTML, SVG, PNG, or PDF.|
 
 
-#### simpd
+#### `simpd`
 |Argument|Description|
 |--------|-----------|
 |`ntips`|Number of tips in the metacommunity phylogeny (number of species). *Default 100*.|
