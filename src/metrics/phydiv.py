@@ -200,7 +200,7 @@ class Phydiv:
                         tmatrix[r][c] = 0
 
         # create a canvas
-        c_width = tcolumns*25 + 50 #total width
+        c_width = tcolumns*20 + 50 #total width
         c_height = trows*15 + 50 #total height
         canvas = toyplot.Canvas(width=c_width, height=c_height);
 
