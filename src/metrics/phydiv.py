@@ -224,7 +224,7 @@ class Phydiv:
             bounds=(tab_xmin, tab_xmax, tab_ymin, tab_ymax),
         )
 
-        colormap = toyplot.color.brewer.map("RedPurple") #need to reverse color!
+        colormap = toyplot.color.brewer.map("RedPurple", reverse = True)
 
         # apply a color to each cell in the table
         for ridx in range(trows): #row index
